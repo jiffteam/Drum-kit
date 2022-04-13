@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <div class="keys">
+        <div data-key="65" class="key">
+          <kbd>A</kbd>
+          <span class="sound">Aw Yeah!</span>
+        </div>
+        <div data-key="83" class="key">
+          <kbd>S</kbd>
+          <span class="sound">Beat 1</span>
+        </div>
+        <div data-key="68" class="key">
+          <kbd>D</kbd>
+          <span class="sound">Southern</span>
+        </div>
+        <div data-key="70" class="key">
+          <kbd>F</kbd>
+          <span class="sound">Beat 2</span>
+        </div>
+        <div data-key="71" class="key">
+          <kbd>G</kbd>
+          <span class="sound">AYOO!</span>
+        </div>
+        <div data-key="72" class="key">
+          <kbd>H</kbd>
+          <span class="sound">Bird Rap</span>
+        </div>
+        <div data-key="74" class="key">
+          <kbd>J</kbd>
+          <span class="sound">UK style lol</span>
+        </div>
+        <div data-key="75" class="key">
+          <kbd>K</kbd>
+          <span class="sound">Celtic</span>
+        </div>
+        <div data-key="76" class="key">
+          <kbd>L</kbd>
+          <span class="sound">Trap</span>
+        </div>
+      </div>
+    
+      <audio data-key="65" src="sounds/239070__bronxio__scratch-ah-yeah-2-1-bar-96-bpm-swing.wav"></audio>
+      <audio data-key="83" src="sounds/176919__spol__hiphopbeathard.wav"></audio>
+      <audio data-key="68" src="sounds/320648__memz__southern-synth-rap-loop.mp3"></audio>
+      <audio data-key="70" src="sounds/345566__paradox39__134-bpm-drums-7-arm-loop.wav"></audio>
+      <audio data-key="71" src="sounds/35364__upright__ayo.wav"></audio>
+      <audio data-key="72" src="sounds/44072__scottyheist__bird-rap.wav"></audio>
+      <audio data-key="74" src="sounds/455315__mushino__mushino-vocals-shanksy-08.mp3"></audio>
+      <audio data-key="75" src="sounds/465664__vivalavinil__celtic-trap-loop.wav"></audio>
+      <audio data-key="76" src="sounds/519271__xinematix__cinematic-trap-bass-with-bells-bm-140.wav"></audio>
+    
+    <script>
+        
+        function playsound(e) {        
+                const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+                const key =  document.querySelector(`.key[data-key="${e.keyCode}"]`);
+                if(!audio) return;//stops the function from running all together
+                audio.currentTime = 0;// rewind to the start
+                audio.play();
+                key.classList.add('playing');
+            } 
+        
+        
+        function removeTransition(e){
+            if(e.propertyName !== 'transform') return;// skip it if it's not a transform
+            this.classList.remove('playing');
+        }
+        
+        
+        const keys = document.querySelectorAll('.key');
+        keys.forEach(key => key.addEventListener('transitionend', removeTransition)); 
+        window.addEventListener('keydown', playsound);
+        
+        
+        </script>
+    
+    
+
+
+
+
+
+</body>
+</html>
